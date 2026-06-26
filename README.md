@@ -13,35 +13,13 @@ typedef struct i2c_bus{
 } i2c_bus_t;
 ```
 
-### Example
-
-This example allows zephyr code to control a driver:
+Some useful helper functions are provided for common i2c tasks:
 
 ```C
-/*
- *  I2C read register function.
- */
-
-uint8_t i2c_read_reg(uint8_t reg, uint8_t *data)
-{
-    return i2c_reg_read_byte(dev_i2c.bus, dev_i2c.addr, reg, data);
-}
-
-/*
- * I2C write register function.
- */
-
-uint8_t i2c_write_reg(uint8_t reg, uint8_t data)
-{
-    return i2c_reg_write_byte(dev_i2c.bus, dev_i2c.addr, reg, data); 
-}
-
-/*
- * I2C wrapper struct.
- */
-
-static const i2c_bus_t i2c_bus = {
-  .i2c_read_reg = i2c_read_reg,
-  .i2c_write_reg = i2c_write_reg,
-};
+static inline int i2c_write_reg(const i2c_bus_t *bus, uint8_t reg, uint8_t data)
+static inline int i2c_read_reg(const i2c_bus_t *bus, uint8_t reg, uint8_t *out)
+static inline void u16_to_le(uint16_t v, uint8_t *low, uint8_t *high)
+static inline uint16_t le_to_u16(uint8_t low, uint8_t high)
+static inline void u16_to_be(uint16_t v, uint8_t *high, uint8_t *low)
+static inline uint16_t be_to_u16(uint8_t high, uint8_t low)
 ```
